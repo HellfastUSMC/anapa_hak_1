@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import (MaxValueValidator, MinValueValidator)
 
-from ..services.models import Menu, Activity
+from services.models import Menu, Activity
 
 user = get_user_model()
 
@@ -99,7 +99,7 @@ class Shift(models.Model):
         'Год смены',
         validators=[MinValueValidator(2022), MaxValueValidator(2100)]
     )
-    season = models.TextChoices('Сезон', choices=SEASONS)
+    season = models.CharField('Сезон', choices=SEASONS)
     date_start = models.DateField('Дата начала смены')
     date_end = models.DateField('Дата конца смены')
 
@@ -130,7 +130,6 @@ class Supervisor(models.Model):
 class Parent(models.Model):
     user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='parents')
     balance = models.FloatField('Баланс', validators=[MinValueValidator(0.0)], default=0.0)
-
 
 class Kid(models.Model):
     user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='kids')

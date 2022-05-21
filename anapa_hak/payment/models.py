@@ -15,6 +15,6 @@ class Transaction(models.Model):
     total = models.IntegerField('Итог')
 
 
-class Wallet(models.model):
+class Wallet(models.Model):
     owner = models.OneToOneField(user, on_delete=models.CASCADE, related_name='wallet', name='Владелец')
     balance = models.IntegerField('Баланс')
