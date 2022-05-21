@@ -5,12 +5,26 @@ MENU_TYPES = ['Breakfast', 'Dinner', 'Supper']
 
 FOODS = ['Food1', 'Food2', 'Food3']
 
+class Poll(models.Model):
+    header = models.CharField('Заголовок')
+    date = models.DateField('Дата')
+    text = models.TextField('Текст')
+    rating = models.FloatField()
+
+
+class News(models.Model):
+    header = models.CharField('Заголовок')
+    date = models.DateField('Дата')
+    text = models.TextField('Текст')
+    author = models.ForeignKey(user, on_delete=models.SET_NULL, null=True, related_name='news')
+
 
 class Menu(models.Model):
     date = models.DateTimeField('Время и дата')
     menu_type = models.CharField(MENU_TYPES)
     dishes = models.CharField(FOODS)
     # dishes = models.ManyToManyField(Food, related_name='Menus')
+
 
 class Activity(models.Model):
     name = models.CharField('Название')
