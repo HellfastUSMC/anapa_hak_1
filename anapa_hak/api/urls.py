@@ -6,7 +6,7 @@ from . import views
 app_name = 'api'
 
 router = SimpleRouter()
-router.register('users', views.UsersViewSet)
+router.register('users', views.KidViewset)
 # router.register('categories', views.CategoryViewSet)
 # router.register('genres', views.GenreViewSet)
 # router.register('titles', views.TitleViewSet)

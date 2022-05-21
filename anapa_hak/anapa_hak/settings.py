@@ -55,7 +55,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'api',
     'payment',
-    'services',
+    'add_services',
     'users',
 ]
 

@@ -3,7 +3,7 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import (MaxValueValidator, MinValueValidator)
 
-from services.models import Menu, Activity
+from add_services.models import Menu, Activity
 
 user = get_user_model()
 

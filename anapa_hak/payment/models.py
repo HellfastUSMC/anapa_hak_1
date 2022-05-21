@@ -5,7 +5,7 @@ user = get_user_model()
 
 
 class Good(models.Model):
-    name = models.CharField('Наименование')
+    name = models.CharField('Наименование', max_length=255)
     price = models.FloatField('Цена')
 
 

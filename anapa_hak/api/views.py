@@ -12,7 +12,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.views import TokenObtainPairView
 
 from . import pagination, serializers
-from .filters import TitleFilter
+#from .filters import TitleFilter
 from .permissions import IsAdmin, IsAuthorAdminModerator, ReadOnly
 
 from users.models import Kid
