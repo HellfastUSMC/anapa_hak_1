@@ -86,10 +86,10 @@ user = get_user_model()
 
 class Shift(models.Model):
     SEASONS = [
-        'Лето',
-        'Осень',
-        'Зима',
-        'Весна'
+        ('SUMMER', 'Лето'),
+        ('AUTUMN', 'Осень'),
+        ('WINTER', 'Зима'),
+        ('SPRING', 'Весна'),
     ]
     number = models.IntegerField(
         'Номер смены',
@@ -99,14 +99,14 @@ class Shift(models.Model):
         'Год смены',
         validators=[MinValueValidator(2022), MaxValueValidator(2100)]
     )
-    season = models.CharField('Сезон', choices=SEASONS)
+    season = models.CharField('Сезон', choices=SEASONS, max_length=255)
     date_start = models.DateField('Дата начала смены')
     date_end = models.DateField('Дата конца смены')
 
 
 class Team(models.Model):
     number = models.IntegerField('Отряд', validators=[MinValueValidator(0)], unique=True)
-    name = models.CharField('Название отряда')
+    name = models.CharField('Название отряда', max_length=255)
     shift = models.ForeignKey(Shift, on_delete=models.SET_NULL, null=True, related_name='teams')
 
 
