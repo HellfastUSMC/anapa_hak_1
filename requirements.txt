@@ -4,7 +4,7 @@ backports.zoneinfo==0.2.1
 certifi==2021.10.8
 charset-normalizer==2.0.12
 django-filter==21.1
-Django==2.2.16
+Django==3.2.13
 djangorestframework-simplejwt==5.0.0
 djangorestframework==3.13.1
 flake8==4.0.1
