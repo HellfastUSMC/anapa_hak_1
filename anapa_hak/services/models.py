@@ -4,6 +4,7 @@ from django.core.validators import (MaxValueValidator, MinValueValidator)
 MENU_TYPES = [('Bre', 'Завтрак'), ('Din', 'Обед'), ('Sup', 'Ужин')]
 
 FOODS = [('Food1', 'Супчик'), ('Food2', 'Булка'), ('Food3', 'Фрукты')]
+from users.models import Supervisor, Shift, Team
 
 
 class Menu(models.Model):
@@ -14,10 +15,10 @@ class Menu(models.Model):
 
 class Activity(models.Model):
     name = models.CharField('Название', max_length=128)
-    responsible = models.ForeignKey('Supervisor', on_delete=models.CASCADE, related_name='activities')
+    responsible = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='activities')
     date_start = models.DateTimeField('Начало')
     date_end = models.DateTimeField('Начало')
-    shift = models.ForeignKey('Shift', on_delete=models.CASCADE, related_name='activities')
-    team = models.ForeignKey('Team', on_delete=models.CASCADE, related_name='activities')
+    shift = models.ForeignKey(Shift, on_delete=models.CASCADE, related_name='activities')
+    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='activities')
     rating = models.FloatField('Рейтинг', validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     comment = models.TextField('Комментарий')

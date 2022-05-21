@@ -2,9 +2,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import (MaxValueValidator, MinValueValidator)
-
-from services.models import Menu, Activity
-
 user = get_user_model()
 
 # class UserRole:
@@ -144,5 +141,5 @@ class Kid(models.Model):
     qr_code = models.ImageField('QR код')
     building_number = models.IntegerField('Номер корпуса')
     room = models.IntegerField('Номер комнаты')
-    activities = models.ManyToManyField(Activity, related_name='kids')
-    menus = models.ManyToManyField(Menu, related_name='kids')
+    activities = models.ManyToManyField('services.Activity', related_name='kids')
+    menus = models.ManyToManyField('services.Menu', related_name='kids')
