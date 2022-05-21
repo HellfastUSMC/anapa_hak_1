@@ -3,6 +3,8 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.core.validators import (MaxValueValidator, MinValueValidator)
 
+from ..services.models import Menu, Activity
+
 user = get_user_model()
 
 # class UserRole:
@@ -130,29 +132,6 @@ class Parent(models.Model):
     balance = models.FloatField('Баланс', validators=[MinValueValidator(0.0)], default=0.0)
 
 
-class Activity(models.Model):
-    name = models.CharField('Название')
-    responsible = models.ForeignKey(Supervisor, on_delete=models.CASCADE, related_name='activities')
-    date_start = models.DateTimeField('Начало')
-    date_end = models.DateTimeField('Начало')
-    shift = models.ForeignKey(Shift, on_delete=models.CASCADE, related_name='activities')
-    team = models.ForeignKey(Team, on_delete=models.CASCADE, related_name='activities')
-    rating = models.FloatField('Рейтинг', validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
-    comment = models.TextField('Комментарий')
-
-
-MENU_TYPES = ['Breakfast', 'Dinner', 'Supper']
-
-FOODS = ['Food1', 'Food2', 'Food3']
-
-
-class Menu(models.Model):
-    date = models.DateTimeField('Время и дата')
-    menu_type = models.TextChoices(MENU_TYPES)
-    dishes = models.TextChoices(FOODS)
-    # dishes = models.ManyToManyField(Food, related_name='Menus')
-
-
 class Kid(models.Model):
     user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='kids')
     shift = models.ManyToManyField(Shift, related_name='kids', name='Смена')
@@ -162,10 +141,9 @@ class Kid(models.Model):
     bio = models.TextField('Общая информация')
     med_info = models.TextField('Медицинская информация')
     food_info = models.TextField('Информация о питании')
-    balance = models.FloatField('Баланс', validators=[MinValueValidator(0.0)], default=0.0)
+    #balance = models.FloatField('Баланс', validators=[MinValueValidator(0.0)], default=0.0)
     qr_code = models.ImageField('QR код')
     building_number = models.IntegerField('Номер корпуса')
     room = models.IntegerField('Номер комнаты')
     activities = models.ManyToManyField(Activity, related_name='kids')
     menus = models.ManyToManyField(Menu, related_name='kids')
-
