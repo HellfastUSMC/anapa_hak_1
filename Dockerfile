@@ -6,7 +6,7 @@ RUN pip install -r requirements.txt
 
 COPY ./anapa_hak /
 
-ENV DB_NAME="${POSTGRES_DB}"
+ENV POSTGRES_DB=
 
 ENV POSTGRES_USER=
 
