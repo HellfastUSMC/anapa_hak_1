@@ -6,7 +6,7 @@ user = get_user_model()
 
 class Good(models.Model):
     name = models.CharField('Наименование', max_length=128)
-    price = models.FloatField('Цена')
+    price = models.FloatField('Цена') # TODO: не используй Float для финансов. Decimal или Int в копейках.
 
 
 class Transaction(models.Model):
