@@ -2,11 +2,15 @@ from django.urls import include, path
 from rest_framework.routers import SimpleRouter
 
 from . import views
-
 app_name = 'api'
 
 router = SimpleRouter()
-router.register('users', views.KidViewset)
+router.register('users', views.UserViewset)
+router.register('kids', views.KidViewset)
+router.register('parent', views.ParentViewset)
+router.register('shifts', views.ShiftViewset)
+router.register('teams', views.TeamViewset)
+router.register('activities', views.ActivityViewset)
 # router.register('categories', views.CategoryViewSet)
 # router.register('genres', views.GenreViewSet)
 # router.register('titles', views.TitleViewSet)
