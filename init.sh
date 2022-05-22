@@ -9,4 +9,4 @@ if [ "$INIT_DB" = "yes" ];
 then echo "todo: load sample data" || exit 1
 fi
 # run wsgi
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:$DJANGO_PORT
