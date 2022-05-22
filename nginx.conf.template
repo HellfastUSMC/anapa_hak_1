@@ -1,11 +1,16 @@
 server {
   listen 80;
-  
+  root /www/data;
   location /api {
     proxy_pass      http://backend:${DJANGO_PORT}/api;
   }
   location /media {
-    root /static;
+  }
+  location /admin {
+  }
+  location /rest_framework {
+  }
+  location /photos {
   }
 
 }
