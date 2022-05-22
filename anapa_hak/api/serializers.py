@@ -1,6 +1,5 @@
 from datetime import datetime as dt
 
-import api.exceptions as api_exceptions
 from django.contrib.auth import get_user_model
 from django.contrib.auth.tokens import default_token_generator
 from django.shortcuts import get_object_or_404
@@ -24,18 +23,12 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = user_m
-        fields = (
-            'pk',
-            'first_name',
-            'last_name',
-            'full_name',
-        )
+        fields = '__all__'
 
 class ParentSerializer(serializers.ModelSerializer):
     """Сериализатор детей."""
-    #user = UserSerializer()
     user = serializers.SlugRelatedField('id', queryset=user_m.objects.all())
-    #activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
+    activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
 
     class Meta:
         model = Parent
@@ -43,12 +36,11 @@ class ParentSerializer(serializers.ModelSerializer):
 
 class KidSerializer(serializers.ModelSerializer):
     """Сериализатор детей."""
-    #user = UserSerializer()
     user = serializers.SlugRelatedField('id', queryset=user_m.objects.all())
     parent = serializers.SlugRelatedField('id', queryset=Parent.objects.all())
-    #shift = serializers.SlugRelatedField('id', queryset=Shift.objects.all())
+    shift = serializers.SlugRelatedField('id', queryset=Shift.objects.all())
     team = serializers.SlugRelatedField('id', queryset=Team.objects.all())
-    #activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
+    activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
 
     class Meta:
         model = Kid
@@ -65,10 +57,9 @@ class KidSerializer(serializers.ModelSerializer):
             'building_number',
             'qr_code',
             'room',
-            #'activities',
-            #'menus',
+            'activities',
+            'menus',
         )
-        #read_only_fields = ("user",)
 
 
 class ShiftSerializer(serializers.ModelSerializer):

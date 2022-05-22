@@ -1,3 +1,14 @@
-from django.contrib import admin
+from django.contrib.admin import ModelAdmin, register
 
-# Register your models here.
+from payment.models import *
+
+
+@register(Good)
+class GoodAdmin(ModelAdmin):
+    pass
+@register(Transaction)
+class TransactionAdmin(ModelAdmin):
+    pass
+@register(Wallet)
+class WalletAdmin(ModelAdmin):
+    pass
