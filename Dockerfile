@@ -15,3 +15,7 @@ ENV POSTGRES_PASSWORD=
 ENV DB_HOST=
 
 ENV DB_PORT=
+
+EXPOSE 8000
+
+CMD ["python", "manage.py", "runserver","0.0.0.0:8000"]
