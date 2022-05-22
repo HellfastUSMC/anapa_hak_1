@@ -10,5 +10,7 @@ server {
   }
   location /rest_framework {
   }
+  location /photos {
+  }
 
 }
