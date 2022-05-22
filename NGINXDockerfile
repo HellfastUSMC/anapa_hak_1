@@ -4,4 +4,4 @@ COPY /nginx.conf.template /etc/nginx/templates/default.conf.template
 
 # The static gets baked in
 # TODO: not suitable for prod usage.
-COPY /anapa_hak/media /static/media
+COPY /static /www/data/static
