@@ -12,6 +12,7 @@ FOODS = [('Food1', 'Еда1'), ('Food2', 'Еда2'), ('Food3', 'Еда3')]
 
 user = get_user_model()
 
+
 class Poll(models.Model):
     header = models.CharField('Заголовок', max_length=255)
     date = models.DateField('Дата')
