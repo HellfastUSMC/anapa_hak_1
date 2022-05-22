@@ -12,6 +12,8 @@ services:
     environment:
       - DB_HOST=db
       - DB_PORT=5432
+      - RUN_MIGRATIONS=yes
+      - INIT_DB=yes
   
   db:
     image: postgres:12

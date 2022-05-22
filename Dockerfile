@@ -6,7 +6,9 @@ RUN pip install -r requirements.txt
 
 COPY ./anapa_hak /
 
-ENV DB_NAME="${POSTGRES_DB}"
+COPY ./init.sh /init.sh
+
+ENV POSTGRES_DB=
 
 ENV POSTGRES_USER=
 
@@ -16,6 +18,12 @@ ENV DB_HOST=
 
 ENV DB_PORT=
 
+ENV INIT_DB=
+
+ENV RUN_MIGRATIONS=
+
 EXPOSE 8000
 
-CMD ["python", "manage.py", "runserver","0.0.0.0:8000"]
+#CMD ["python", "manage.py", "runserver","0.0.0.0:8000"]
+
+ENTRYPOINT ["/init.sh"]
