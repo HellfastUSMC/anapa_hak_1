@@ -133,9 +133,9 @@ class Parent(models.Model):
 
 class Kid(models.Model):
     user = models.ForeignKey(user, on_delete=models.CASCADE, related_name='kids')
-    shift = models.ManyToManyField(Shift, related_name='kids', name='Смена')
-    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='kids', name='Отряд')
-    parent = models.ForeignKey(Parent, on_delete=models.SET_NULL, null=True, related_name='kids', name='Родитель')
+    shift = models.ManyToManyField(Shift, related_name='kids', name='shift', blank=True)
+    team = models.ForeignKey(Team, on_delete=models.SET_NULL, null=True, related_name='kids', name='team', blank=True)
+    parent = models.ForeignKey(Parent, on_delete=models.SET_NULL, null=True, related_name='kids', name='parent', blank=True)
     birth_date = models.DateField('Дата рождения')
     bio = models.TextField('Общая информация')
     med_info = models.TextField('Медицинская информация')
@@ -144,5 +144,5 @@ class Kid(models.Model):
     qr_code = models.ImageField('QR код')
     building_number = models.IntegerField('Номер корпуса')
     room = models.IntegerField('Номер комнаты')
-    activities = models.ManyToManyField(Activity, related_name='kids')
-    menus = models.ManyToManyField(Menu, related_name='kids')
+    #activities = models.ManyToManyField(Activity, related_name='kids', blank=True, null=True)
+    #menus = models.ManyToManyField(Menu, related_name='kids', blank=True, null=True)

@@ -8,20 +8,89 @@ from rest_framework import serializers
 from rest_framework.validators import UniqueValidator
 from rest_framework_simplejwt.tokens import RefreshToken
 
-from users.models import Kid
+from add_services.models import Activity
+from users.models import Kid, Parent, Shift, Team
 
-user = get_user_model()
+user_m = get_user_model()
+
+
+class UserSerializer(serializers.ModelSerializer):
+    """Сериализатор пользователей."""
+
+    full_name = serializers.SerializerMethodField('get_full_name')
+
+    def get_full_name(self, obj):
+        return obj.get_full_name()
+
+    class Meta:
+        model = user_m
+        fields = (
+            'pk',
+            'first_name',
+            'last_name',
+            'full_name',
+        )
+
+class ParentSerializer(serializers.ModelSerializer):
+    """Сериализатор детей."""
+    #user = UserSerializer()
+    user = serializers.SlugRelatedField('id', queryset=user_m.objects.all())
+    #activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
+
+    class Meta:
+        model = Parent
+        fields = '__all__'
 
 class KidSerializer(serializers.ModelSerializer):
     """Сериализатор детей."""
-
-    user = serializers.SlugRelatedField(
-        read_only=True,
-        slug_field="username",
-        default=serializers.CurrentUserDefault(),
-    )
+    #user = UserSerializer()
+    user = serializers.SlugRelatedField('id', queryset=user_m.objects.all())
+    parent = serializers.SlugRelatedField('id', queryset=Parent.objects.all())
+    #shift = serializers.SlugRelatedField('id', queryset=Shift.objects.all())
+    team = serializers.SlugRelatedField('id', queryset=Team.objects.all())
+    #activities = serializers.SlugRelatedField('id', queryset=Activity.objects.all())
 
     class Meta:
         model = Kid
-        fields = ("id", "user__first_name", "shift__name", "team__name")
-        read_only_fields = ("user",)
+        fields = (
+            'pk',
+            'user',
+            'shift',
+            'team',
+            'parent',
+            'birth_date',
+            'bio',
+            'med_info',
+            'food_info',
+            'building_number',
+            'qr_code',
+            'room',
+            #'activities',
+            #'menus',
+        )
+        #read_only_fields = ("user",)
+
+
+class ShiftSerializer(serializers.ModelSerializer):
+    """Сериализатор смен."""
+
+    class Meta:
+        model = Shift
+        fields = '__all__'
+
+
+class TeamSerializer(serializers.ModelSerializer):
+    """Сериализатор смен."""
+
+    class Meta:
+        model = Team
+        fields = '__all__'
+
+
+class ActivitySerializer(serializers.ModelSerializer):
+    """Сериализатор смен."""
+    responsible = serializers.SlugRelatedField('id', queryset=user_m.objects.all())
+
+    class Meta:
+        model = Activity
+        fields = '__all__'

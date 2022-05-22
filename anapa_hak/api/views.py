@@ -15,9 +15,10 @@ from . import pagination, serializers
 #from .filters import TitleFilter
 from .permissions import IsAdmin, IsAuthorAdminModerator, ReadOnly
 
-from users.models import Kid
+from users.models import Kid, Parent, Shift, Team
+from add_services.models import Activity
 
-User = get_user_model()
+user = get_user_model()
 
 
 # class UsersViewSet(viewsets.ModelViewSet):
@@ -32,7 +33,8 @@ User = get_user_model()
 #     lookup_field = "username"
 class BaseViewSet(viewsets.ModelViewSet):
     """Базовая вьюха."""
-    permission_classes = [IsAdmin | ReadOnly]
+    #permission_classes = [IsAdmin | ReadOnly]
+    permission_classes = [AllowAny]
     pagination_class = pagination.DefaultPagination
 
 
@@ -40,6 +42,27 @@ class KidViewset(BaseViewSet):
     queryset = Kid.objects.all()
     serializer_class = serializers.KidSerializer
 
+
+class UserViewset(BaseViewSet):
+    queryset = user.objects.all()
+    serializer_class = serializers.UserSerializer
+
+class ParentViewset(BaseViewSet):
+    queryset = Parent.objects.all()
+    serializer_class = serializers.ParentSerializer
+
+class ShiftViewset(BaseViewSet):
+    queryset = Shift.objects.all()
+    serializer_class = serializers.ShiftSerializer
+
+class TeamViewset(BaseViewSet):
+    queryset = Team.objects.all()
+    serializer_class = serializers.TeamSerializer
+
+
+class ActivityViewset(BaseViewSet):
+    queryset = Activity.objects.all()
+    serializer_class = serializers.ActivitySerializer
 # class SelfEditApiView(RetrieveUpdateAPIView):
 #     serializer_class = serializers.UserEditSerializer
 #     permission_classes = [IsAuthenticated]

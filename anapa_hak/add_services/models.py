@@ -35,7 +35,7 @@ class Menu(models.Model):
 
 class Activity(models.Model):
     name = models.CharField('Название', max_length=255)
-    responsible = models.ForeignKey('users.Supervisor', on_delete=models.CASCADE, related_name='activities')
+    responsible = models.ForeignKey('users.Supervisor', on_delete=models.CASCADE, related_name='activities', blank=True, null=True)
     date_start = models.DateTimeField('Начало')
     date_end = models.DateTimeField('Начало')
     shift = models.ForeignKey('users.Shift', on_delete=models.CASCADE, related_name='activities')
